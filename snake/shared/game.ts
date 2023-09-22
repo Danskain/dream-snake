@@ -42,7 +42,7 @@ export class Game implements LifeCycle
     if ((this.snake.x === this.food.x) && (this.snake.z === this.food.z))
     {
       this.score += 1
-      this.food.respawn()
+      this.food.respawn(this.snake.head, this.snake.tail)
       this.snake.grow()
     }
   }

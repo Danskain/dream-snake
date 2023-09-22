@@ -30,11 +30,16 @@ export class Food implements LifeCycle
     SceneManager.scene.add(this.mesh)
   }
 
-  public respawn(): void
+  public respawn(mesh: Mesh, tail: Array<Mesh>): void
   {
     this.x = Math.round(Math.random() * Ground.size - Ground.size / 2)
     this.z = Math.round(Math.random() * Ground.size - Ground.size / 2)
     this.mesh.position.set(this.x, 0, this.z)
+    if (mesh.position.x === this.x && mesh.position.z === this.z) this.respawn(mesh, tail)
+    for (const t of tail)
+    {
+      if (t.position.x === this.x && t.position.z === this.z) this.respawn(mesh, tail)
+    }
   }
 
   public update(): void
