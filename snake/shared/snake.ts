@@ -5,12 +5,12 @@ import { InputManager } from '../input/keyboard'
 
 export class Snake implements LifeCycle
 {
-  private head: Mesh
+  public head: Mesh
   private geometry: BoxGeometry
   private material: MeshStandardMaterial
   public x: number = 0
   public z: number = 0
-  private tail: Array<Mesh> = []
+  public tail: Array<Mesh> = []
   private inputManager: InputManager
   private time: number = 0
   private cycle: number = 0.2
@@ -45,6 +45,11 @@ export class Snake implements LifeCycle
     }
   }
 
+  public grow(): void
+  {
+
+  }
+  
   private updatePosition(): void
   {
     if (this.inputManager.input.up) this.z += 1

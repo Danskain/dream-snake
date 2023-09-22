@@ -1,5 +1,10 @@
-import { Color, HemisphereLight, PerspectiveCamera, Scene } from "three"
-import { Diorama } from "./classes/diorama"
+import { State } from './states/state'
+import { States } from './states/states'
+import { Color, HemisphereLight, PerspectiveCamera, Scene } from 'three'
+import { Diorama } from './shared/diorama'
+import { MenuState } from './states/menu.state'
+import { GameState } from './states/game.state'
+import { Game } from './shared/game'
 
 export class SceneManager
 {
@@ -11,9 +16,7 @@ export class SceneManager
     SceneManager.createScene()
     SceneManager.createCamera()
     SceneManager.createLights()
-
-    const diorama = new Diorama()
-    diorama.start()
+    SceneManager.onReady()
   }
 
   private static createScene(): void
@@ -35,5 +38,13 @@ export class SceneManager
     const light = new HemisphereLight(0xFFFFFF, 0.2)
     light.position.set(100,100,100)
     SceneManager.scene.add(light)
+  }
+
+  private static onReady(): void
+  {
+    MenuState.diorama = new Diorama()
+    GameState.game = new Game()
+    State.setCurrent(States.menu)
+    MenuState.diorama.start()
   }
 }

@@ -1,4 +1,7 @@
 import '../styles/main.css'
+import '../styles/menu.css'
+import '../styles/panel.css'
+import '../styles/defeat.css'
 
 import App from 'next/app'
 

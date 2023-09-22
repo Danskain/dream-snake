@@ -1,14 +1,15 @@
 import { BoxGeometry, Color, Mesh, MeshStandardMaterial } from 'three'
 import { LifeCycle } from '../types/helpers'
 import { SceneManager } from '../scene.manager'
+import { Ground } from './ground'
 
 export class Food implements LifeCycle
 {
   private mesh: Mesh
   private geometry: BoxGeometry
   private material: MeshStandardMaterial
-  private x: number = 4
-  private z: number = 4
+  public x: number = 4
+  public z: number = 4
 
   constructor()
   {
@@ -27,6 +28,13 @@ export class Food implements LifeCycle
     this.mesh = new Mesh(this.geometry, this.material)
     this.mesh.position.set(this.x, 0, this.z)
     SceneManager.scene.add(this.mesh)
+  }
+
+  public respawn(): void
+  {
+    this.x = Math.round(Math.random() * Ground.size - Ground.size / 2)
+    this.z = Math.round(Math.random() * Ground.size - Ground.size / 2)
+    this.mesh.position.set(this.x, 0, this.z)
   }
 
   public update(): void
